@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .form-container h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-group input:focus {
+      border-color: hsl(211, 100%, 50%);
+      outline: none;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      background-color: hsl(100, 100%, 30%);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background-color: hsl(100, 100%, 20%);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Login Form</h1>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword">
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Check for empty fields
+      if (!name || !email || !password || !confirmPassword) {
+        alert('Fill all the fields');
+        return;
+      }
+
+      // Validate email
+      if (!email.includes('@')) {
+        alert('Please include @ in the email');
+        return;
+      }
+
+      // Validate password (must contain uppercase, lowercase, number, and special character)
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      if (!passwordRegex.test(password)) {
+        alert('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.');
+        return;
+      }
+
+      // Check if passwords match
+      if (password !== confirmPassword) {
+        alert('Password does not match');
+        return;
+      }
+
+      // If all validations pass
+      alert('Form submitted successfully!');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
